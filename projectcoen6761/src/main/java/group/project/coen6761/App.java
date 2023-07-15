@@ -87,7 +87,7 @@ public class App
 				}
 				robot.setXY(newXPosition, robot.y);
 				}catch(ArrayIndexOutOfBoundsException e){
-					robot.setXY(0, robot.y);
+					robot.setXY(room.room.length-1, robot.y);
 					System.out.println("******Oppps, Cant go further change the direction.******\n");
 				}
 		}
