@@ -42,17 +42,13 @@ public class App
 		int size=Integer.parseInt(n);
 		room=new Room(size);
 		robot=new Robot();
-		room.room[room.room.length-1][0]=1;
+//		room.room[room.room.length-1][0]=1;
 	}
 	public static void printThCurrentPositionOfRobot() {
 		robot.print();
 	}
 	public static void move(String s) {
 		int space=Integer.parseInt(s);
-		if(robot.pen==false) {
-			return;
-		}
-		else {
 		///...EAST
 		if(robot.direction==Direction.East) {
 		 try {
@@ -63,6 +59,7 @@ public class App
 						break;
 					}else {
 						newXPosition=(robot.x+i);
+						if(robot.pen==true)
 						room.room[room.room.length-1-robot.y][newXPosition]=1;					
 					}
 			}
@@ -82,12 +79,14 @@ public class App
 							break;
 						}else {
 							newXPosition=(robot.x-i);
+							System.out.println(newXPosition);
+							if(robot.pen==true)
 							room.room[room.room.length-1-robot.y][newXPosition]=1;					
 						}
 				}
 				robot.setXY(newXPosition, robot.y);
 				}catch(ArrayIndexOutOfBoundsException e){
-					robot.setXY(room.room.length-1, robot.y);
+					robot.setXY(0, robot.y);
 					System.out.println("******Oppps, Cant go further change the direction.******\n");
 				}
 		}
@@ -101,6 +100,7 @@ public class App
 							break;
 						}else {
 							newYPosition=(robot.y+j);
+							if(robot.pen==true)
 							room.room[room.room.length-1-newYPosition][robot.x]=1;					
 						}
 				}
@@ -120,6 +120,7 @@ public class App
 							break;
 						}else {
 							newYPosition=(robot.y-j);
+							if(robot.pen==true)
 							room.room[room.room.length-1-newYPosition][robot.x]=1;					
 						}
 				}
@@ -129,7 +130,6 @@ public class App
 					System.out.println("******Oppps, Cant go further change the direction.******\n");
 				}
 			}
-		}
 	}
 	public static void main( String[] args )
     {
@@ -187,6 +187,7 @@ public class App
                 	move(number);
                     break;
                 case "p":
+                	
                 	if(isStarted)
                 	room.print();
                     break;

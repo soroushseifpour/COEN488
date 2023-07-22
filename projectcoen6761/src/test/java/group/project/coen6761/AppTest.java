@@ -6,7 +6,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import group.project.coen6761.Robot.Direction;
 /**
  * Unit test for simple App.
@@ -29,9 +32,8 @@ public class AppTest
 	}
 	@Test
 	void testMove() {
+		
 		iRobot.setPenDown();
-		if(iRobot.pen==false)
-			return;
 		iRobot.direction=Direction.East;
 		iRobot.setXY(0, 0);
         
@@ -66,7 +68,7 @@ public class AppTest
         assertEquals(4, iRobot.y); // Check if the robot's Y coordinate remains unchanged
 //        
         iRobot.direction=Direction.South;
-        
+//        
         // Test moving in the South direction
         App.move("1"); // Move 1 space down
 	    System.out.println("Room after moving south:");
@@ -76,7 +78,27 @@ public class AppTest
         assertEquals(3
         		, iRobot.y); // Check if the robot's Y coordinate is updated correctly
 	}
-
+	 ///..condition
+	@Test
+	void testDirectionEast() {
+		iRobot.direction=Direction.East;
+		assertEquals(Direction.East,iRobot.direction);
+	}
+	@Test
+	void testDirectionWest() {
+		iRobot.direction=Direction.West;
+		assertEquals(Direction.West,iRobot.direction);
+	}
+	@Test
+	void testDirectionNorth() {
+		iRobot.direction=Direction.North;
+		assertEquals(Direction.North,iRobot.direction);
+	}
+	@Test
+	void testDirectionSOuth() {
+		iRobot.direction=Direction.South;
+		assertEquals(Direction.South,iRobot.direction);
+	}
     @Test
     void testinitiateTheRoom(){
     	App.initiateTheRoom("5");
@@ -86,25 +108,47 @@ public class AppTest
         //check whether a robot is initiated or not
         assertEquals(0, App.robot.x);
         assertEquals(0, App.robot.y);
-        //check whether the cell is 1 or not
-        assertEquals(1, App.room.room[iRoom.room.length-1][0]);
     }
+    ///..condition
     @Test
-    void testconvertInput() {
+    void testconvertInputM() {
     	String inputThatContainsM="m4";
     	String m="m";
     	assertEquals(m,App.convertInput(inputThatContainsM));
+    }
+    @Test
+    void testconvertInputI() {
     	String inputThatContainsI="I5";
     	String i="i";
     	assertEquals(i,App.convertInput(inputThatContainsI));
     }
+    ///..condition
     @Test
-    void testgetNumber() {
+    void testgetNumberM() {
     	String inputThatContainsM="m4";
     	String i="4";
     	assertEquals(i,App.getNumber(inputThatContainsM));
+    }
+    @Test
+    void testgetNumberI() {
     	String inputThatContainsI="I5";
     	String j="5";
     	assertEquals(j,App.getNumber(inputThatContainsI));
     }
+    ///..condition
+    @Test
+    void penTestRoomTrue() {
+    	iRobot.setPenDown();
+        assertEquals(true,iRobot.pen);
+    }
+    @Test
+    void penTestRoomFalse() {
+    	iRobot.setPenUp();
+        assertEquals(false,iRobot.pen);
+    }
+    @Test
+    void testprintThCurrentPositionOfRobot() {
+    	iRobot.print();
+    }
+    
 }
