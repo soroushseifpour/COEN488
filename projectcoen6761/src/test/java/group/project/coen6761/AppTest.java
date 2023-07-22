@@ -78,6 +78,58 @@ public class AppTest
         assertEquals(3
         		, iRobot.y); // Check if the robot's Y coordinate is updated correctly
 	}
+	@Test
+	void moveToEast() {
+		iRobot.setPenDown();
+		iRobot.direction=Direction.East;
+		iRobot.setXY(0, 0);
+        // Test moving in the East direction
+	    App.move("3"); // Move 3 spaces to the right
+	    System.out.println("Room after moving east:");
+	    iRoom.print(); // Print the room to see the updated values
+        assertEquals(1, iRoom.room[4][3]); // Check if the robot left a trail in the room
+        assertEquals(3, iRobot.x); // Check if the robot's X coordinate is updated correctly
+        assertEquals(0, iRobot.y); // Check if the robot's Y coordinate remains unchanged
+	}
+	@Test
+	void moveToWest() {
+		iRobot.setPenDown();
+		iRobot.direction=Direction.West;
+		iRobot.setXY(2, 0);
+        // Test moving in the East direction
+	    App.move("2"); // Move 2 spaces to the right
+	    System.out.println("Room after moving west:");
+	    iRoom.print(); // Print the room to see the updated values
+        assertEquals(1, iRoom.room[4][0]); // Check if the robot left a trail in the room
+        assertEquals(0, iRobot.x); // Check if the robot's X coordinate is updated correctly
+        assertEquals(0, iRobot.y); // Check if the robot's Y coordinate remains unchanged
+	}
+	@Test
+	void moveToSouth() {
+		iRobot.setPenDown();
+		iRobot.direction=Direction.South;
+		iRobot.setXY(2, 2);
+        // Test moving in the East direction
+	    App.move("2"); // Move 3 spaces to the right
+	    System.out.println("Room after moving south:");
+	    iRoom.print(); // Print the room to see the updated values
+        assertEquals(1, iRoom.room[4][2]); // Check if the robot left a trail in the room
+        assertEquals(2, iRobot.x); // Check if the robot's X coordinate is updated correctly
+        assertEquals(0, iRobot.y); // Check if the robot's Y coordinate remains unchanged
+	}
+	@Test
+	void moveToNorth() {
+		iRobot.setPenDown();
+		iRobot.direction=Direction.North;
+		iRobot.setXY(0, 0);
+        // Test moving in the East direction
+	    App.move("2"); // Move 3 spaces to the right
+	    System.out.println("Room after moving North:");
+	    iRoom.print(); // Print the room to see the updated values
+        assertEquals(1, iRoom.room[2][0]); // Check if the robot left a trail in the room
+        assertEquals(0, iRobot.x); // Check if the robot's X coordinate is updated correctly
+        assertEquals(2, iRobot.y); // Check if the robot's Y coordinate remains unchanged
+	}
 	 ///..condition
 	@Test
 	void testDirectionEast() {
@@ -150,5 +202,14 @@ public class AppTest
     void testprintThCurrentPositionOfRobot() {
     	iRobot.print();
     }
-    
+    @Test
+    void testTurnRight() {
+    	iRobot.turnRight();
+    	assertEquals(Direction.East,iRobot.direction);
+    }
+    @Test
+    void testTurnLeft() {
+    	iRobot.turnLeft();
+    	assertEquals(Direction.West,iRobot.direction);
+    }
 }
