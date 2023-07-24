@@ -2,6 +2,9 @@ package group.project.coen6761;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 //import org.junit.Test;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,6 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.io.StringWriter;
+
 import group.project.coen6761.Robot.Direction;
 /**
  * Unit test for simple App.
@@ -21,15 +26,30 @@ public class AppTest
      */
 	static Room iRoom; 
 	static Robot iRobot;
-	
+	static controler iControler;
+    private final InputStream systemIn = System.in;
+    private final PrintStream systemOut = System.out;
+    private ByteArrayInputStream testIn;
+    private ByteArrayOutputStream testOut;
+    private StringWriter stringWriter;
 	
 	@BeforeEach
 	public void setUp() throws Exception {
 		iRoom = new Room(5);
 		iRobot= new Robot();
+		iControler= new controler();
 		App.robot=iRobot;
 		App.room=iRoom;
+        testOut = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(testOut));
+        stringWriter = new StringWriter();;
+        
 	}
+    @AfterEach
+    public void tearDown() {
+        System.setIn(systemIn);
+        System.setOut(systemOut);
+    }
 	@Test
 	void testMove() {
 		

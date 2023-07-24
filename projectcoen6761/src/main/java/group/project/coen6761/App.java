@@ -131,79 +131,12 @@ public class App
 				}
 			}
 	}
+//	public static void run() {
+//	   
+//	}
 	public static void main( String[] args )
     {
-        Scanner scanner = new Scanner(System.in);
-        String choice = "";
-        boolean isStarted=false;
-        while (choice != "Q") {
-            System.out.println("********* Welcome to the Console Menu *********");
-            System.out.println("1.To initialize the room enter I followed with an intiger:");
-            System.out.println("2. To Print the current position of robot enter C:");
-            System.out.println("3. To pen up enter U:");
-            System.out.println("4. To pen down enter D:");
-            System.out.println("5. To Turn right enter R:");
-            System.out.println("6. To Turn right enter L:");
-            System.out.println("7. To move the robot forward enter M followed by an intiger:");
-            System.out.println("8. To print the room enter P:");
-            System.out.println("9. To Stop the program Enter Q:");
-            System.out.println("************************************************");
-            System.out.print("Enter your choice: ");
-            choice = scanner.nextLine();
-            String number="";
-            choice=choice.trim().replaceAll("\\s", "").toLowerCase();
-            if(choice.contains("m")||choice.trim().replaceAll("\\s", "").toLowerCase().contains("i")) {
-            	number=getNumber(choice);
-            	choice=convertInput(choice);
-            }
-            try {
-            switch (choice) {
-                case "i":
-                	initiateTheRoom(number);
-                	isStarted=true;
-                    break;
-                case "c":
-                	if(isStarted)
-                	printThCurrentPositionOfRobot();
-                    break;
-                case "u":
-                	if(isStarted)
-                	robot.setPenUp();
-                    break;
-                case "d":
-                	if(isStarted)
-                	robot.setPenDown();
-                    break;
-                case "r":
-                	if(isStarted)
-                	robot.turnRight();
-                    break;
-                case "l":
-                	if(isStarted)
-                	robot.turnLeft();
-                    break;
-                case "m":
-                	if(isStarted)
-                	move(number);
-                    break;
-                case "p":
-                	
-                	if(isStarted)
-                	room.print();
-                    break;
-                case "q":
-                    System.out.println("Exit the program....");
-                    break;    
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
-            }
-            }catch(NumberFormatException e) {
-            	System.out.println("Invalid input format. Please provide a valid number.");
-            }
-            System.out.println(); // Add a line break for readability
-        }
-
-        scanner.close();
+		controler c= new controler();
+		c.run();
     }
 }
